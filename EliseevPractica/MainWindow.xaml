@@ -40,7 +40,7 @@
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom"
                        Text="X" />
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"
-                       Text="Y" />
+                       Text="Y" Height="15" Width="7" />
         </Grid>
 
     </Grid>

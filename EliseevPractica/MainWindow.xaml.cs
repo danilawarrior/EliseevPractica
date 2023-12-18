@@ -74,10 +74,34 @@ namespace EliseevPractica
                 double y = graphCanvas.ActualHeight - ((sequence[i] - minY) * yStep);
 
                 polyline.Points.Add(new Point(x, y));
+
+                // Добавление меток на оси X
+                TextBlock label = new TextBlock
+                {
+                    Text = i.ToString(),
+                    Margin = new Thickness(x - 10, graphCanvas.ActualHeight + 5, 0, 0)
+                };
+                graphCanvas.Children.Add(label);
             }
 
             graphCanvas.Children.Add(polyline);
+
+            // Добавление меток на оси Y
+            
+            for (int i = (int)minY; i <= maxY; i++)
+            {
+                double y = graphCanvas.ActualHeight - ((i - minY) * yStep);
+
+                TextBlock label = new TextBlock
+                {
+                    Text = i.ToString(),
+                    Margin = new Thickness(-10, y - 10, -20, -20) // Измененное значение отступа
+                };
+                graphCanvas.Children.Add(label);
+            }
+
         }
+
         private void CheckGeometricProgression()
         {
             if (sequence.Count < 3)
