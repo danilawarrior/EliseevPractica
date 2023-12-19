@@ -19,7 +19,7 @@ namespace EliseevPractica
     /// </summary>
     public partial class AuthWindow : Window
     {
-        public AuthWindow()
+        public AuthWindow() //da
         {
             InitializeComponent();
         }
