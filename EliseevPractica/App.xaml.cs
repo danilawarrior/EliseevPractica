@@ -13,5 +13,6 @@ namespace EliseevPractica
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }
