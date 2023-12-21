@@ -30,7 +30,7 @@ namespace EliseevPractica
             {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
-
+                Close();
                 //открытие окна админа
             }
             else MessageBox.Show("Введите логин и пароль");

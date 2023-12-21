@@ -50,7 +50,53 @@ namespace EliseevPractica
             CheckGeometricProgression();
         }
 
-        private void DrawSequenceGraph() //ПРОВЕРКА
+       
+
+        private void CheckGeometricProgression()
+        {
+            if (sequence.Count < 3)
+            {
+                MessageBox.Show("Недостаточно элементов для проверки геометрической прогрессии.");
+                return;
+            }
+            if (MainClass.checkGeometricProgression(sequence))
+            {
+                MessageBox.Show("Последовательность является геометрической прогрессией.");
+            }else MessageBox.Show("Последовательность не является геометрической прогрессией.");
+        }
+
+        private void AboutProgram_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Задание: Определить является ли введенная последовательность чисел геометрической прогрессией. Построить график изменения последовательности (график строится по мере ввода данных).\nРазработчик: Елисеев Данила");
+        }
+
+        private void Auth_Click(object sender, RoutedEventArgs e)
+        {
+            AuthWindow authWindow = new AuthWindow();
+            authWindow.Show();
+            Close();
+        }
+
+        private void inputBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            sequence.Clear();
+            graphCanvas.Children.Clear();
+
+            string input = inputBox.Text.Trim();
+            string[] numbers = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string numStr in numbers)
+            {
+                if (double.TryParse(numStr, NumberStyles.Any, CultureInfo.InvariantCulture, out double num))
+                {
+                    sequence.Add(num);
+                }
+            }
+
+            DrawSequenceGraph();
+        }
+
+        private void DrawSequenceGraph()
         {
             if (sequence.Count < 2)
                 return;
@@ -75,7 +121,6 @@ namespace EliseevPractica
 
                 polyline.Points.Add(new Point(x, y));
 
-                // Добавление меток на оси X
                 TextBlock label = new TextBlock
                 {
                     Text = i.ToString(),
@@ -86,49 +131,19 @@ namespace EliseevPractica
 
             graphCanvas.Children.Add(polyline);
 
-            // Добавление меток на оси Y
-            
             for (int i = (int)minY; i <= maxY; i++)
             {
                 double y = graphCanvas.ActualHeight - ((i - minY) * yStep);
 
                 TextBlock label = new TextBlock
                 {
+                    Width = 20,
+                    TextAlignment = TextAlignment.Right,
+                    HorizontalAlignment = HorizontalAlignment.Left,
                     Text = i.ToString(),
-                    Margin = new Thickness(-10, y - 10, -20, -20) // Измененное значение отступа
+                    Margin = new Thickness(-25, y - 10, -45, -20) // Измененное значение отступа
                 };
                 graphCanvas.Children.Add(label);
-            }
-
-        }
-
-        private void CheckGeometricProgression()
-        {
-            if (sequence.Count < 3)
-            {
-                MessageBox.Show("Недостаточно элементов для проверки геометрической прогрессии.");
-                return;
-            }
-
-            bool isGeometricProgression = true;
-            double ratio = sequence[1] / sequence[0]; 
-
-            for (int i = 2; i < sequence.Count; i++)
-            {
-                if (sequence[i] / sequence[i - 1] != ratio)
-                {
-                    isGeometricProgression = false;
-                    break;  
-                }
-            } //сравниваем по парно разделенные друг на друга элементы
-
-            if (isGeometricProgression)
-            {
-                MessageBox.Show("Последовательность является геометрической прогрессией.");
-            }
-            else
-            {
-                MessageBox.Show("Последовательность не является геометрической прогрессией.");
             }
         }
     }

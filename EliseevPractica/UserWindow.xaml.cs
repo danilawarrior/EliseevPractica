@@ -107,32 +107,23 @@ namespace EliseevPractica
                 MessageBox.Show("Недостаточно элементов для проверки геометрической прогрессии.");
                 return;
             }
-
-            bool isGeometricProgression = true;
-            double ratio = sequence[1] / sequence[0];
-
-            for (int i = 2; i < sequence.Count; i++)
-            {
-                if (sequence[i] / sequence[i - 1] != ratio)
-                {
-                    isGeometricProgression = false;
-                    break;
-                }
-            } //сравниваем по парно разделенные друг на друга элементы
-
-            if (isGeometricProgression)
+            if (MainClass.checkGeometricProgression(sequence))
             {
                 MessageBox.Show("Последовательность является геометрической прогрессией.");
             }
-            else
-            {
-                MessageBox.Show("Последовательность не является геометрической прогрессией.");
-            }
+            else MessageBox.Show("Последовательность не является геометрической прогрессией.");
         }
 
         private void Auth_Click(object sender, RoutedEventArgs e)
         {
+            AuthWindow authWindow = new AuthWindow();
+            authWindow.Show();
+            Close();
+        }
 
+        private void AboutProgram_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Задание: Определить является ли введенная последовательность чисел геометрической прогрессией. Построить график изменения последовательности (график строится по мере ввода данных).\nРазработчик: Елисеев Данила");
         }
     }
 }
